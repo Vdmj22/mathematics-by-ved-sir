@@ -30,13 +30,56 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Normalize project-site paths and global UI
+      - name: Normalize project-site paths, branding and SEO
         run: |
           python3 - <<'PY'
           from pathlib import Path
+          import re
+          import json
 
           base = "/mathematics-by-ved-sir"
-          css = '<link rel="stylesheet" href="{base}/assets/css/global-overrides.css">'.format(base=base)
+          css = f'<link rel="stylesheet" href="{base}/assets/css/global-overrides.css">'
+
+          organization = {
+              "@context": "https://schema.org",
+              "@type": ["EducationalOrganization", "LocalBusiness"],
+              "@id": "https://vdmj22.github.io/mathematics-by-ved-sir/#organization",
+              "name": "Mathematics by Ved Sir",
+              "alternateName": "Ved Sir Maths Coaching",
+              "url": "https://vdmj22.github.io/mathematics-by-ved-sir/",
+              "logo": "https://vdmj22.github.io/mathematics-by-ved-sir/assets/brand/logo-black.webp",
+              "image": "https://vdmj22.github.io/mathematics-by-ved-sir/assets/brand/logo-black.webp",
+              "description": "Mathematics learning resources, coaching and exam preparation for Class 11, Class 12 and Applied Mathematics in Greater Noida West.",
+              "telephone": "+91-7441155877",
+              "priceRange": "₹₹",
+              "address": {
+                  "@type": "PostalAddress",
+                  "streetAddress": "LA RESIDENTIA, Amrapali Dream Valley, Tech Zone 4",
+                  "addressLocality": "Greater Noida West",
+                  "addressRegion": "Uttar Pradesh",
+                  "postalCode": "201006",
+                  "addressCountry": "IN"
+              },
+              "geo": {"@type": "GeoCoordinates", "latitude": 28.5833, "longitude": 77.4474},
+              "areaServed": [
+                  {"@type": "AdministrativeArea", "name": "Greater Noida West"},
+                  {"@type": "AdministrativeArea", "name": "Noida Extension"},
+                  {"@type": "AdministrativeArea", "name": "Tech Zone 4"},
+                  {"@type": "AdministrativeArea", "name": "Gaur City"}
+              ],
+              "hasMap": "https://www.google.com/maps/search/?api=1&query=Mathematics%20by%20Ved%20Sir%2C%20LA%20RESIDENTIA%2C%20Amrapali%20Dream%20Valley%2C%20Greater%20Noida%2C%20Uttar%20Pradesh%20201006",
+              "hasOfferCatalog": {
+                  "@type": "OfferCatalog",
+                  "name": "Mathematics Tuition & Coaching Courses",
+                  "itemListElement": [
+                      {"@type": "Offer", "itemOffered": {"@type": "Course", "name": "CBSE Class 12 Mathematics", "description": "Calculus, Vectors, Three-Dimensional Geometry and CBSE Board examination preparation."}},
+                      {"@type": "Offer", "itemOffered": {"@type": "Course", "name": "CBSE Class 12 Applied Mathematics", "description": "Financial Mathematics, Linear Programming, Statistics and Applied Mathematics preparation."}},
+                      {"@type": "Offer", "itemOffered": {"@type": "Course", "name": "CBSE Class 11 Mathematics", "description": "Concept building in Sets, Functions, Trigonometry, Algebra and Class 11 Mathematics topics."}}
+                  ]
+              },
+              "founder": {"@type": "Person", "name": "Ved Prakash Sharma", "jobTitle": "Mathematics Educator"}
+          }
+          schema_script = '<script type="application/ld+json">' + json.dumps(organization, ensure_ascii=False, separators=(",", ":")) + '</script>'
 
           for path in Path(".").rglob("*.html"):
               if ".git" in path.parts:
@@ -51,8 +94,11 @@ jobs:
 
               # Apply one consistent brand/UI layer to every page, including legacy pages.
               if 'assets/css/global-overrides.css' not in text:
-                  marker = '</head>'
-                  text = text.replace(marker, css + marker, 1)
+                  text = text.replace('</head>', css + '</head>', 1)
+
+              # Keep the homepage organization entity authoritative and remove self-serving review markup.
+              if path.as_posix() == 'index.html':
+                  text = re.sub(r'<script type="application/ld\+json">.*?</script>', schema_script, text, count=1, flags=re.S)
 
               path.write_text(text, encoding="utf-8")
               print(f"normalized {path}")
