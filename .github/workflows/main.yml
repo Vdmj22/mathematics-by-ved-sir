@@ -30,6 +30,24 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      - name: Fix project-site asset and navigation paths
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          base = "/mathematics-by-ved-sir"
+          for path in Path(".").rglob("*.html"):
+              if ".git" in path.parts:
+                  continue
+              text = path.read_text(encoding="utf-8")
+              text = text.replace('href="/', f'href="{base}/')
+              text = text.replace("href='/'", f"href='{base}/'")
+              text = text.replace('src="/', f'src="{base}/')
+              text = text.replace("src='/'", f"src='{base}/')
+              path.write_text(text, encoding="utf-8")
+              print(f"fixed {path}")
+          PY
+
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:
