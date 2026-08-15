@@ -1,0 +1,79 @@
+/* Mathematics by Ved Sir — global brand + UX layer */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --brand-navy:#101a3b;
+  --brand-purple:#6c4df6;
+  --brand-blue:#3b82f6;
+  --brand-gold:#d9a62e;
+  --brand-coral:#f36b5f;
+  --brand-teal:#16a394;
+  --brand-cream:#fff9ed;
+}
+
+body{font-family:'DM Sans',Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif}
+
+/* Replace every legacy Sigma/template identity with the supplied real logo. */
+.brand:not(.logo-brand){
+  min-width:220px;
+  min-height:60px;
+  gap:0;
+}
+.brand:not(.logo-brand) .brand-mark{
+  width:220px;
+  height:58px;
+  flex:0 0 220px;
+  border:0;
+  border-radius:0;
+  background:transparent url('../brand/logo-black.webp') center/contain no-repeat;
+  box-shadow:none;
+  font-size:0;
+  color:transparent;
+  filter:brightness(0) saturate(100%) invert(68%) sepia(88%) saturate(650%) hue-rotate(355deg) brightness(103%) contrast(98%);
+}
+.brand:not(.logo-brand)>span:not(.brand-mark){display:none}
+.site-footer .brand:not(.logo-brand) .brand-mark{filter:brightness(0) saturate(100%) invert(82%) sepia(64%) saturate(750%) hue-rotate(353deg) brightness(104%) contrast(96%)}
+
+/* Keep the authentic logo visually dominant without inventing another brand mark. */
+.logo-brand .site-logo{object-fit:contain}
+.site-header .logo-brand .site-logo{width:205px;max-height:58px}
+.site-footer .logo-brand .site-logo{width:205px;max-width:205px}
+
+/* More welcoming, student-facing visual language. */
+.hero,.page-hero{
+  background:
+    radial-gradient(circle at 85% 18%,rgba(108,77,246,.14),transparent 24%),
+    radial-gradient(circle at 8% 85%,rgba(22,163,148,.10),transparent 22%),
+    linear-gradient(135deg,#fff 0%,#f7f5ff 55%,#eef8ff 100%);
+}
+
+.path-card,.tool-card,.resource-card,.class-card,.card{
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+}
+.path-card:hover,.tool-card:hover,.resource-card:hover,.class-card:hover,.card:hover{
+  transform:translateY(-5px);
+}
+
+.path-purple{background:linear-gradient(145deg,#f1edff,#e4ddff)!important}
+.path-pink{background:linear-gradient(145deg,#fff0f4,#ffdfe9)!important}
+.path-teal{background:linear-gradient(145deg,#e9fbf7,#d3f2eb)!important}
+
+.resource-icon,.tool-icon{
+  box-shadow:0 8px 20px rgba(16,26,59,.08);
+}
+
+/* Make the Google trust block feel like a real local-business identity, not a template strip. */
+.trust-section{background:linear-gradient(90deg,#fff,#fffaf0,#fff)}
+.google-btn{background:var(--brand-navy)}
+.google-btn:hover{background:var(--brand-purple)}
+
+/* Clear keyboard focus and touch targets. */
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #7c68ff;outline-offset:3px}
+.site-nav a,.btn,.google-btn{min-height:42px}
+
+@media(max-width:760px){
+  .brand:not(.logo-brand){min-width:170px}
+  .brand:not(.logo-brand) .brand-mark{width:170px;height:52px;flex-basis:170px}
+  .site-header .logo-brand .site-logo{width:175px;max-height:52px}
+  .site-footer .logo-brand .site-logo{width:180px}
+}
