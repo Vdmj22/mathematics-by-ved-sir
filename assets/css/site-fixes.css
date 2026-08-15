@@ -1,0 +1,28 @@
+/* Site-wide fixes: real brand identity + consistent project-site UI */
+:root{--brand-purple:#5b43d6;--brand-pink:#e94b7b;--brand-gold:#d6a52e;--brand-navy:#17142d}
+/* Use the supplied Mathematics by Ved Sir logo on legacy pages that still use the old sigma markup. */
+.brand:not(.logo-brand){min-width:220px;min-height:62px;gap:0}
+.brand:not(.logo-brand) .brand-mark{width:220px;height:58px;flex:0 0 220px;border:0;border-radius:0;background-color:transparent;background-image:url('../brand/logo-black.webp');background-repeat:no-repeat;background-position:center;background-size:contain;box-shadow:none;font-size:0;color:transparent;filter:brightness(0) saturate(100%) invert(67%) sepia(83%) saturate(500%) hue-rotate(358deg) brightness(103%) contrast(96%)}
+.brand:not(.logo-brand)>span:not(.brand-mark){display:none}
+.site-footer .brand:not(.logo-brand) .brand-mark{filter:brightness(0) saturate(100%) invert(82%) sepia(62%) saturate(800%) hue-rotate(353deg) brightness(104%) contrast(95%)}
+/* Legacy pages were built with root-relative URLs and missed the project-site base path. */
+.page-hero{position:relative;overflow:hidden;padding:4.8rem 0 4rem;background:linear-gradient(135deg,#eeeaff 0%,#fff2dc 48%,#e4fbfa 100%);border-bottom:1px solid #ebe7f5}
+.page-hero:after{content:"";position:absolute;width:280px;height:280px;border-radius:50%;right:-90px;top:-110px;background:rgba(233,75,123,.12);pointer-events:none}
+.breadcrumbs{position:relative;z-index:1;margin-bottom:1.2rem;font-size:.8rem;color:#667085}
+.breadcrumbs ol{display:flex;flex-wrap:wrap;gap:.45rem;list-style:none;padding:0;margin:0}
+.breadcrumbs li+li:before{content:"/";margin-right:.45rem;color:#a3a8b7}
+.breadcrumbs a{font-weight:800;color:var(--brand-purple)}
+.page-hero .eyebrow{position:relative;z-index:1;color:var(--brand-purple)}
+.page-hero h1{position:relative;z-index:1;font-size:clamp(2.6rem,6vw,4.8rem);line-height:1;letter-spacing:-.055em;margin:.25rem 0 1rem}
+.page-hero .lead{position:relative;z-index:1;max-width:700px}
+.page-section{padding:4.5rem 0}
+.grid{display:grid;gap:1rem}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card{background:#fff;border:1px solid #e9e5ef;border-radius:22px;padding:1.5rem;box-shadow:0 12px 35px rgba(63,44,174,.07);transition:.2s ease}.card:hover{transform:translateY(-3px);box-shadow:0 22px 50px rgba(63,44,174,.12)}
+.card h2,.card h3{margin-top:0}.card a{color:var(--brand-purple);font-weight:800}.placeholder{background:linear-gradient(135deg,#fff8fb,#f5f2ff);border-color:#e4ddff}.tag{display:inline-flex;align-items:center;padding:.3rem .6rem;border-radius:999px;background:#ebe7ff;color:#4a35b2;font-size:.7rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.7rem}
+.form-grid{display:grid;gap:1rem}.form-grid label{display:grid;gap:.4rem;font-weight:800;font-size:.85rem}.input{width:100%;border:1px solid #dfe3ec;border-radius:12px;padding:.75rem .85rem;background:#fafbfe;color:#111a33;outline:0}.input:focus{border-color:#7b68e8;box-shadow:0 0 0 4px rgba(91,67,214,.1)}
+.site-footer .footer-grid{align-items:start}.site-footer .small{color:#98a7c8;line-height:1.65}
+/* Consistent visual rhythm on every content page. */
+.site-nav a[aria-current=page]{font-weight:900}
+@media(max-width:960px){.grid.two,.grid.three{grid-template-columns:1fr 1fr}.brand:not(.logo-brand){min-width:185px}.brand:not(.logo-brand) .brand-mark{width:185px;flex-basis:185px}}
+@media(max-width:760px){.brand:not(.logo-brand){min-width:175px}.brand:not(.logo-brand) .brand-mark{width:175px;height:52px;flex-basis:175px}.page-hero{padding:3.8rem 0 3rem}.page-section{padding:3.5rem 0}.grid.two,.grid.three{grid-template-columns:1fr}}
+@media(max-width:480px){.brand:not(.logo-brand) .brand-mark{width:160px;flex-basis:160px}.nav-wrap{gap:.5rem}}
