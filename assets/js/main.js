@@ -1,4 +1,10 @@
-(()=>{const href=new URL('./assets/css/vibrant.css',document.baseURI).href;if(!document.querySelector(`link[href="${href}"]`)){const link=document.createElement('link');link.rel='stylesheet';link.href=href;document.head.appendChild(link);}})();
+(()=>{
+  const styleLink=document.querySelector('link[href*="assets/css/styles.css"]');
+  const base=styleLink?new URL(styleLink.href):new URL('./assets/css/',document.baseURI);
+  const load=(name)=>{const href=new URL(name,base.href).href;if(!document.querySelector(`link[href="${href}"]`)){const link=document.createElement('link');link.rel='stylesheet';link.href=href;document.head.appendChild(link);}};
+  load('vibrant.css');
+  load('site-fixes.css');
+})();
 const toggle=document.querySelector('[data-nav-toggle]');
 const nav=document.querySelector('[data-site-nav]');
 if(toggle&&nav){toggle.addEventListener('click',()=>{const open=nav.classList.toggle('is-open');toggle.setAttribute('aria-expanded',String(open));});nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{nav.classList.remove('is-open');toggle.setAttribute('aria-expanded','false');}));}
