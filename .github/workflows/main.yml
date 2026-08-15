@@ -30,22 +30,32 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Fix project-site asset and navigation paths
+      - name: Normalize project-site paths and global UI
         run: |
           python3 - <<'PY'
           from pathlib import Path
 
           base = "/mathematics-by-ved-sir"
+          css = '<link rel="stylesheet" href="{base}/assets/css/global-overrides.css">'.format(base=base)
+
           for path in Path(".").rglob("*.html"):
               if ".git" in path.parts:
                   continue
               text = path.read_text(encoding="utf-8")
+
+              # Keep project-site navigation/assets working on GitHub Pages.
               text = text.replace('href="/', f'href="{base}/')
               text = text.replace("href='/'", f"href='{base}/'")
               text = text.replace('src="/', f'src="{base}/')
               text = text.replace("src='/'", f"src='{base}/'")
+
+              # Apply one consistent brand/UI layer to every page, including legacy pages.
+              if 'assets/css/global-overrides.css' not in text:
+                  marker = '</head>'
+                  text = text.replace(marker, css + marker, 1)
+
               path.write_text(text, encoding="utf-8")
-              print(f"fixed {path}")
+              print(f"normalized {path}")
           PY
 
       - name: Upload website
