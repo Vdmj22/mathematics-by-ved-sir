@@ -2,6 +2,9 @@
 .site-header .logo-brand{width:210px!important;min-width:210px!important;height:58px!important;display:flex!important;align-items:center!important;overflow:visible!important;gap:0!important}
 .site-header .logo-brand .site-logo{display:block!important;width:210px!important;height:58px!important;max-width:210px!important;max-height:58px!important;object-fit:contain!important;object-position:center!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
 .site-header .logo-brand .brand-fallback,.site-footer .logo-brand .brand-fallback{display:none!important}
+/* Legacy sigma/logo-mark headers also use the supplied master PNG. */
+.brand:not(.logo-brand) .brand-mark{background-image:url('../brand/logo-primary-new.png')!important;background-size:contain!important;background-position:center!important;background-repeat:no-repeat!important;background-color:transparent!important;border:0!important;box-shadow:none!important;filter:none!important;font-size:0!important;color:transparent!important}
+.site-footer .brand:not(.logo-brand) .brand-mark{filter:none!important}
 .site-footer .logo-brand{width:205px!important;min-width:205px!important;height:auto!important}
 .site-footer .logo-brand .site-logo{display:block!important;width:205px!important;height:auto!important;max-width:205px!important;object-fit:contain!important}
 /* Keep the full navigation visible on normal desktop widths; switch to a menu before it can clip. */
