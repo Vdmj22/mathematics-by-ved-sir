@@ -4,6 +4,19 @@
   const load=(name)=>{const href=new URL(name,base.href).href;if(!document.querySelector(`link[href="${href}"]`)){const link=document.createElement('link');link.rel='stylesheet';link.href=href;document.head.appendChild(link);}};
   load('vibrant.css');
   load('site-fixes.css');
+  load('brand-final.css');
+  const logoUrl=new URL('./assets/brand/logo-primary-new.png',document.baseURI).href;
+  document.querySelectorAll('.site-logo').forEach(img=>{img.src=logoUrl;img.removeAttribute('srcset');img.loading='eager';});
+  let favicon=document.querySelector('link[data-brand-favicon]');
+  if(!favicon){favicon=document.createElement('link');favicon.rel='icon';favicon.dataset.brandFavicon='true';document.head.appendChild(favicon);}
+  favicon.href=logoUrl;
+  favicon.type='image/png';
+  const nav=document.querySelector('[data-site-nav]');
+  if(nav && !nav.querySelector('.nav-phone')){
+    const li=document.createElement('li');
+    li.innerHTML='<a class="nav-phone" href="tel:+917441155877" aria-label="Call Mathematics by Ved Sir">☎ Call</a>';
+    nav.querySelector('ul')?.appendChild(li);
+  }
 })();
 const toggle=document.querySelector('[data-nav-toggle]');
 const nav=document.querySelector('[data-site-nav]');
