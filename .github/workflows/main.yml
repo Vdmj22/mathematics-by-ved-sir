@@ -47,8 +47,8 @@ jobs:
               "name": "Mathematics by Ved Sir",
               "alternateName": "Ved Sir Maths Coaching",
               "url": "https://vdmj22.github.io/mathematics-by-ved-sir/",
-              "logo": "https://vdmj22.github.io/mathematics-by-ved-sir/assets/brand/logo-black.webp",
-              "image": "https://vdmj22.github.io/mathematics-by-ved-sir/assets/brand/logo-black.webp",
+              "logo": "https://vdmj22.github.io/mathematics-by-ved-sir/assets/brand/logo-primary-new.png",
+              "image": "https://vdmj22.github.io/mathematics-by-ved-sir/assets/brand/logo-primary-new.png",
               "description": "Mathematics learning resources, coaching and exam preparation for Class 11, Class 12 and Applied Mathematics in Greater Noida West.",
               "telephone": "+91-7441155877",
               "priceRange": "₹₹",
@@ -96,9 +96,27 @@ jobs:
               if 'assets/css/global-overrides.css' not in text:
                   text = text.replace('</head>', css + '</head>', 1)
 
-              # Keep the homepage organization entity authoritative and remove self-serving review markup.
+              # Keep canonicals consistent with the actual GitHub Pages project-site URL.
+              # The short Complex Numbers index is only a redirect; canonicalize it to the real paper page.
+              if path.as_posix() != 'templates/resource-page.html':
+                  if path.as_posix() == 'index.html':
+                      canonical_url = 'https://vdmj22.github.io/mathematics-by-ved-sir/'
+                  elif path.as_posix() == 'class-11/complex-numbers/index.html':
+                      canonical_url = 'https://vdmj22.github.io/mathematics-by-ved-sir/class-11/complex-numbers/questions.html'
+                      if 'name="robots"' not in text:
+                          text = text.replace('</head>', '<meta name="robots" content="noindex,follow"></head>', 1)
+                  elif path.name == 'index.html':
+                      canonical_url = 'https://vdmj22.github.io/mathematics-by-ved-sir/' + path.parent.as_posix().rstrip('/') + '/'
+                  else:
+                      canonical_url = 'https://vdmj22.github.io/mathematics-by-ved-sir/' + path.as_posix()
+                  canonical_tag = '<link rel="canonical" href="' + canonical_url + '">'
+                  text, canonical_count = re.subn(r'<link[^>]*rel=["\\']canonical["\\'][^>]*>', canonical_tag, text, count=1, flags=re.I)
+                  if canonical_count == 0:
+                      text = text.replace('</head>', canonical_tag + '</head>', 1)
+
+              # Keep the homepage organization entity authoritative and avoid unsupported rating claims.
               if path.as_posix() == 'index.html':
-                  text = re.sub(r'<script type="application/ld\+json">.*?</script>', schema_script, text, count=1, flags=re.S)
+                  text = re.sub(r'<script type="application/ld\\+json">.*?</script>', schema_script, text, count=1, flags=re.S)
 
               path.write_text(text, encoding="utf-8")
               print(f"normalized {path}")
