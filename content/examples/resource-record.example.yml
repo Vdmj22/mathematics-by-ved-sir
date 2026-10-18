@@ -1,0 +1,19 @@
+# Design example only — not a publishable resource.
+id: class-12-integration-example
+title: "Class 12 Mathematics: Integration Practice"
+class: "12"
+subject: "Mathematics"
+chapter: "Integration"
+resource_type: "question-bank"
+board: "CBSE"
+exam_year: null
+description: "A chapter-wise practice resource for revising integration methods and checking working."
+author: "Mathematics by Ved Sir"
+last_reviewed: null
+status: "draft"
+canonical_path: "/class-12/integration/question-bank/"
+pdf: null
+related:
+  - class-12-integration-notes
+  - class-12-integration-test
+copyright_status: "original-or-permission-verified"
