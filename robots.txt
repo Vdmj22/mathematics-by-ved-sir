@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://mathematicsbyvedsir.in/sitemap.xml
+Sitemap: https://vdmj22.github.io/mathematics-by-ved-sir/sitemap.xml
