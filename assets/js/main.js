@@ -5,11 +5,11 @@
   load('vibrant.css');
   load('site-fixes.css');
   load('brand-final.css');
-  const logoUrl=new URL('./assets/brand/logo-primary-new.png',document.baseURI).href;
+  const logoUrl=new URL('../brand/logo-primary-new.png',base.href).href;
   document.querySelectorAll('.site-logo').forEach(img=>{img.src=logoUrl;img.removeAttribute('srcset');img.loading='eager';});
   let favicon=document.querySelector('link[data-brand-favicon]');
   if(!favicon){favicon=document.createElement('link');favicon.rel='icon';favicon.dataset.brandFavicon='true';document.head.appendChild(favicon);}
-  favicon.href=logoUrl;
+  favicon.href=new URL('../brand/favicon.png',base.href).href;
   favicon.type='image/png';
   const nav=document.querySelector('[data-site-nav]');
   if(nav && !nav.querySelector('.nav-phone')){
