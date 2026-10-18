@@ -110,13 +110,13 @@ jobs:
                   else:
                       canonical_url = 'https://vdmj22.github.io/mathematics-by-ved-sir/' + path.as_posix()
                   canonical_tag = '<link rel="canonical" href="' + canonical_url + '">'
-                  text, canonical_count = re.subn(r'<link[^>]*rel=["\\']canonical["\\'][^>]*>', canonical_tag, text, count=1, flags=re.I)
+                  text, canonical_count = re.subn(r'<link[^>]*rel="canonical"[^>]*>', canonical_tag, text, count=1, flags=re.I)
                   if canonical_count == 0:
                       text = text.replace('</head>', canonical_tag + '</head>', 1)
 
               # Keep the homepage organization entity authoritative and avoid unsupported rating claims.
               if path.as_posix() == 'index.html':
-                  text = re.sub(r'<script type="application/ld\\+json">.*?</script>', schema_script, text, count=1, flags=re.S)
+                  text = re.sub(r'<script type="application/ld\+json">.*?</script>', schema_script, text, count=1, flags=re.S)
 
               path.write_text(text, encoding="utf-8")
               print(f"normalized {path}")
