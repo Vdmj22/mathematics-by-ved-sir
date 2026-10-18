@@ -92,3 +92,16 @@ body{background:#faf9f6!important;color:#202020!important;font-family:Inter,Aria
  .footer-grid{gap:1.2rem!important}
 }
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* Small, static learning visual on the homepage */
+.hero-learning-card{position:relative;min-height:300px;padding:1.2rem;background:#151515!important;border:1px solid #3a3322!important;border-radius:10px!important;box-shadow:none!important;overflow:hidden}
+.math-stage{position:relative;min-height:230px;display:grid;place-items:center}
+.math-core{width:145px;height:145px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#111!important;border:1px solid #8c6b21!important;color:#fff;box-shadow:none!important;animation:none!important}
+.math-core span{font:3.8rem/.95 Georgia,serif;color:#e6d39a}
+.math-core small{font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;text-align:center;color:#d4d4d4;margin-top:.55rem}
+.learning-progress{position:relative;display:flex;align-items:center;justify-content:space-between;padding:.8rem .9rem;background:#111!important;border-top:1px solid #3a3322!important;color:#fff!important;border-radius:0!important;box-shadow:none!important}
+.learning-progress span:first-child{display:block;font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:#aaa}
+.learning-progress strong{font-size:.84rem;color:#fff}
+.hero-proof{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1.25rem;color:#bdbdbd;font-size:.85rem}
+.hero-proof span{padding:0!important;border:0!important;background:transparent!important;color:#bdbdbd!important;border-radius:0!important}
+@media(max-width:760px){.hero-learning-card{min-height:260px!important}.math-stage{min-height:190px}.math-core{width:125px;height:125px}.math-core span{font-size:3.2rem}}
